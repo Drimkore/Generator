@@ -51,6 +51,13 @@
             return characterField;
         }
 
+        function addHP(){
+            let hitPoints = document.createElement('p');
+            hitPoints.textContent = "Здоровье: " + rolldx(8);
+            characterField.append(hitPoints);
+            return characterField;
+        }
+
         function takeArmor(){
             var rollres = rolldx(20); 
             if (rollres < 4)
@@ -178,7 +185,7 @@
                                 'Фляга',
                                 'Факелы, 5'];
         
-        document.body.append(addName(), addStats(), addEquipment());
+        document.body.append(addName(), addStats(), addHP(), addEquipment());
     </script>
 </body>
 </html>
