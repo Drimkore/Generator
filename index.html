@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+
+    <h1>Knave character generator</h1>    
+    <div class="form">
+        <input type="submit" value="Submit roll" class="rollSubmit">
+    </div>
+    <div class="characterField">
+
+    </div>
+    
+    
+    
+    <script>
+        const rollSubmit = document.querySelector('.rollSubmit');
+        const characterField = document.querySelector('.characterField');
+        
+        function rolldx(x){
+            return Math.floor(Math.random()*x)+1;
+        }
+
+        function addName(){
+            let characterName = document.createElement('p');
+            characterName.textContent ="Имя: " + names[Math.floor(Math.random()*names.length)];
+            characterField.append(characterName);
+            return characterField;
+        }
+
+        function addClass(){
+            let characterClass = document.createElement('p');
+            characterClass.textContent = "Класс: "+ classes[Math.floor(Math.random()*classes.length)];
+            characterField.append(characterClass);
+            return characterField;
+        }
+        
+        function addStats(){            
+            for (let i =0; i<statsName.length;i++){
+                let stat = document.createElement('p');
+                stat.textContent = statsName[i] + " " + (10+rolldx(6));
+                characterField.append(stat);
+            }
+            return characterField;
+        }
+
+        function takeArmor(){
+            var rollres = rolldx(20); 
+            if (rollres < 4)
+            return armors[0];
+            else if (rollres < 15)
+            return armors[1];
+            else if (rollres < 20)
+            return armors[2];
+            else
+            return armors[3];
+        }
+
+        function takeAdditionalArmor(){
+            var rollres = rolldx(20); 
+            if (rollres < 14)
+            return helmsAndShields[0];
+            else if (rollres < 17)
+            return helmsAndShields[1];
+            else if (rollres < 20)
+            return helmsAndShields[2];
+            else
+            return helmsAndShields[3];
+        }
+
+        function addItems(){
+            let item = new DocumentFragment();
+            let armor = document.createElement('li');
+            armor.textContent = "Доспехи: " + takeArmor() + " " + takeAdditionalArmor() ;
+            item.append(armor)
+            let sg = document.createElement('li');
+            sg.append("пайки на 2 дня");
+            item.append(sg);
+            let sg2 = document.createElement('li');
+            sg2.append("Оружие (на ваш выбор)");
+            item.append(sg2);
+            for (let i = 0; i<2;i++){
+                let li = document.createElement('li');
+                li.textContent = adventurerGear[rolldx(10)];
+                item.append(li);
+            }
+            let mg = document.createElement('li');
+            mg.append(mainGearOne[rolldx(10)]);
+            item.append(mg);
+            let mg2 = document.createElement('li');
+            mg2.append(mainGearTwo[rolldx(10)]);
+            item.append(mg2);
+            return item;
+        }
+
+        function addEquipment(){
+            let equipment = document.createElement('ul');
+            equipment.textContent = "Снаряжение: ";
+            equipment.append(addItems());
+            characterField.append(equipment);
+            return characterField;
+        }
+        function rolling(){
+            location.reload();
+        }
+        rollSubmit.addEventListener('click', rolling);
+        
+        //Tables
+        var statsName = ["Сила","Ловкость","Выносливость","Мудрость","Интеллект","Харизма"];
+        var names = ["Alex", "John", "Liam", "Kendzi"];
+        var armors = ["Без доспеха","Кожаные","Кольчужные","Пластинчатые"];
+        var helmsAndShields = ["",", шлем",", щит",", шлем и щит"];
+        var mainGearOne = [  'Шест, 10фт',
+                             'Удочка',
+                             'Мешок',
+                             'Мраморные шарики',
+                             'Палатка',
+                             'Клей',
+                             'Колья, 5',
+                             'Кирка',
+                             'Факелы, 5',
+                             'Песочные часы',
+                             'Пила',
+                             'Сеть',
+                             'Ведро',
+                             'Клещи',
+                             'Ёжики',
+                             'Отмычки',
+                             'Зубило',
+                             'Железный напильник',
+                             'Сверло',
+                             'Гвозди'];
+        var mainGearTwo = [  'Благовония',
+                             'Поддельные драг. камни',
+                             'Губка',
+                             'Книга (чистая)',
+                             'Линзы',
+                             'Колода карт',
+                             'Духи',
+                             'Набор кубиков',
+                             'Горн',
+                             'Горшок для готовки',
+                             'Бутыль',
+                             'Грим',
+                             'Мыло',
+                             'Свисток',
+                             'Подзорная труба',
+                             'Муз. инструмент',
+                             'Смола',
+                             'Перо и чернила',
+                             'Нитки',
+                             'Колокольчик'];
+        var adventurerGear = [  'Веревка, 50фт',
+                                'Фонарь',
+                                'Шкивы',
+                                'Лампадное масло',
+                                'Свечи, 5',
+                                'Замок',
+                                'Цепь, 10 фт',
+                                'Кандалы',
+                                'Мел, 10',
+                                'Зеркало',
+                                'Ломик',
+                                'Шест, 10 фт',
+                                'Спички',
+                                'Мешок',
+                                'Крюк-кошка',
+                                'Палатка',
+                                'Молоток',
+                                'Колья, 5',
+                                'Фляга',
+                                'Факелы, 5'];
+        
+        document.body.append(addName(), addStats(), addEquipment());
+    </script>
+</body>
+</html>

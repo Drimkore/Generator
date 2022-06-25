@@ -1,1 +1,3 @@
-# Generator
+# Character generator
+
+WIP
