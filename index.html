@@ -10,20 +10,38 @@
 <body>
 
 
-    <h1>Knave character generator</h1>    
-    <div class="form">
+    <h1>Character generator</h1>    
+    <div class="formButton">
         <input type="submit" value="Submit roll" class="rollSubmit">
+        <input type="submit" value="Воин" class="getFighter">
+        <input type="submit" value="Жрец" class="getCleric">
+        <input type="submit" value="Вор" class="getThief">
+        <input type="submit" value="Волшебник" class="getMagicUser">
     </div>
-    <div class="characterField">
+    <input type="button" value="Print Page" onclick="printSheet()">
+
+    <div class="characterField" id="characterField">
 
     </div>
-    
-    
+
+
     
     <script>
         const rollSubmit = document.querySelector('.rollSubmit');
+        const getFighter = document.querySelector('getFighter');
+        const getCleric = document.querySelector('getCleric');
+        const getThief = document.querySelector('getThief');
+        const getMagicUser = document.querySelector('getMagicUser');
         const characterField = document.querySelector('.characterField');
         
+        function printSheet(){
+            var printwin = window.open("");
+            printwin.document.write(document.getElementById("characterField").innerHTML);
+            printwin.stop();
+            printwin.print();
+            printwin.close();
+        }
+                
         function rolldx(x){
             return Math.floor(Math.random()*x)+1;
         }
